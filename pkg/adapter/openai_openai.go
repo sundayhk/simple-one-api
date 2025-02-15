@@ -2,7 +2,6 @@ package adapter
 
 import (
 	"encoding/json"
-	"fmt"
 	"simple-one-api/pkg/mycomdef"
 	myopenai "simple-one-api/pkg/openai"
 	"strings"
@@ -23,7 +22,6 @@ func OpenAIResponseToOpenAIResponse(resp *openai.ChatCompletionResponse) *myopen
 	if resp == nil {
 		return nil
 	}
-	fmt.Printf("111,%+v\n", resp)
 	var choices []myopenai.Choice
 	for _, choice := range resp.Choices {
 		role := choice.Message.Role
