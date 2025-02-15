@@ -2,11 +2,13 @@ package adapter
 
 import (
 	"encoding/json"
-	"github.com/google/uuid"
-	"github.com/sashabaranov/go-openai"
+	"fmt"
 	"simple-one-api/pkg/mycomdef"
 	myopenai "simple-one-api/pkg/openai"
 	"strings"
+
+	"github.com/google/uuid"
+	"github.com/sashabaranov/go-openai"
 )
 
 func CheckOpenAIStreamRespone(respStream *openai.ChatCompletionStreamResponse) {
@@ -21,7 +23,7 @@ func OpenAIResponseToOpenAIResponse(resp *openai.ChatCompletionResponse) *myopen
 	if resp == nil {
 		return nil
 	}
-
+	fmt.Printf("111,%+v\n", resp)
 	var choices []myopenai.Choice
 	for _, choice := range resp.Choices {
 		role := choice.Message.Role
@@ -29,9 +31,11 @@ func OpenAIResponseToOpenAIResponse(resp *openai.ChatCompletionResponse) *myopen
 			role = mycomdef.KEYNAME_ASSISTANT
 		}
 		message := myopenai.ResponseMessage{
-			Role:    role,
-			Content: choice.Message.Content,
+			Role:             role,
+			Content:          choice.Message.Content,
+			ReasoningContent: choice.Message.ReasoningContent,
 		}
+
 		var logProbs json.RawMessage
 		if choice.LogProbs != nil {
 			logProbs, _ = json.Marshal(choice.LogProbs)
