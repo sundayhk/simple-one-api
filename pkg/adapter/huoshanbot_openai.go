@@ -1,9 +1,10 @@
 package adapter
 
 import (
-	"github.com/volcengine/volcengine-go-sdk/service/arkruntime/model"
 	myopenai "simple-one-api/pkg/openai"
 	"time"
+
+	"github.com/volcengine/volcengine-go-sdk/service/arkruntime/model"
 )
 
 func HuoShanBotResponseToOpenAIResponse(huoshanBotResp *model.BotChatCompletionResponse) *myopenai.OpenAIResponse {
@@ -20,12 +21,17 @@ func HuoShanBotResponseToOpenAIResponse(huoshanBotResp *model.BotChatCompletionR
 		if choice.Message.Content != nil && choice.Message.Content.StringValue != nil {
 			content = *choice.Message.Content.StringValue
 		}
+		var reasoningContent string
+		if choice.Message.ReasoningContent != nil {
+			reasoningContent = *choice.Message.ReasoningContent
+		}
 
 		choices = append(choices, myopenai.Choice{
 			Index: choice.Index,
 			Message: myopenai.ResponseMessage{
-				Role:    choice.Message.Role,
-				Content: content,
+				Role:             choice.Message.Role,
+				Content:          content,
+				ReasoningContent: reasoningContent,
 			},
 			LogProbs:     nil, // 假设 logprobs 不存在
 			FinishReason: string(choice.FinishReason),

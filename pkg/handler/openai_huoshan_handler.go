@@ -3,13 +3,6 @@ package handler
 import (
 	"context"
 	"encoding/json"
-	"github.com/gin-gonic/gin"
-	"github.com/sashabaranov/go-openai"
-	"github.com/volcengine/volcengine-go-sdk/service/arkruntime"
-	"github.com/volcengine/volcengine-go-sdk/service/arkruntime/model"
-	huoshanutils "github.com/volcengine/volcengine-go-sdk/service/arkruntime/utils"
-	"github.com/volcengine/volcengine-go-sdk/volcengine"
-	"go.uber.org/zap"
 	"io"
 	"net/http"
 	"simple-one-api/pkg/config"
@@ -17,6 +10,14 @@ import (
 	"simple-one-api/pkg/utils"
 	"strings"
 	"time"
+
+	"github.com/gin-gonic/gin"
+	"github.com/sashabaranov/go-openai"
+	"github.com/volcengine/volcengine-go-sdk/service/arkruntime"
+	"github.com/volcengine/volcengine-go-sdk/service/arkruntime/model"
+	huoshanutils "github.com/volcengine/volcengine-go-sdk/service/arkruntime/utils"
+	"github.com/volcengine/volcengine-go-sdk/volcengine"
+	"go.uber.org/zap"
 )
 
 const DefaultHuoShanServerURL = "https://ark.cn-beijing.volces.com/api/v3"

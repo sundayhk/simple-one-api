@@ -5,10 +5,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/gin-gonic/gin"
-	"github.com/google/uuid"
-	"github.com/sashabaranov/go-openai"
-	"go.uber.org/zap"
 	"io"
 	"net/http"
 	"net/url"
@@ -19,6 +15,11 @@ import (
 	"simple-one-api/pkg/mylog"
 	"simple-one-api/pkg/utils"
 	"strings"
+
+	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
+	"github.com/sashabaranov/go-openai"
+	"go.uber.org/zap"
 )
 
 func formatAzureURL(inputURL string) (string, error) {

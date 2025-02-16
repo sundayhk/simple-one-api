@@ -2,7 +2,9 @@ package adapter
 
 import (
 	"encoding/json"
+	"go.uber.org/zap"
 	"simple-one-api/pkg/mycomdef"
+	"simple-one-api/pkg/mylog"
 	myopenai "simple-one-api/pkg/openai"
 	"strings"
 
@@ -22,6 +24,8 @@ func OpenAIResponseToOpenAIResponse(resp *openai.ChatCompletionResponse) *myopen
 	if resp == nil {
 		return nil
 	}
+	mylog.Logger.Info("Resp", zap.Any("resp", resp))
+
 	var choices []myopenai.Choice
 	for _, choice := range resp.Choices {
 		role := choice.Message.Role
